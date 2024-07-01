@@ -1,0 +1,30 @@
+<app-loader [isLoading]="isLoading"></app-loader>
+<div *ngIf="!isLoading">
+<div>
+  <br>
+    <input type="text" [(ngModel)]="searchText" placeholder="Search by title..." (click)="onSearch()">
+    <br>
+
+  <!-- Your existing component content -->
+
+    <table>
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>URL</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of paginatedData">
+          <td>{{ item.title }}</td>
+          <td><a [href]="item.url" target="_blank">{{ item.url }}</a></td>
+        </tr>
+      </tbody>
+    </table>
+  
+    <div class="pagination">
+      <button [disabled]="currentPage === 1" (click)="onPageChange(currentPage - 1)">Previous</button>
+      <span>Page {{ currentPage }}</span>
+      <button [disabled]="currentPage * itemsPerPage >= data.length" (click)="onPageChange(currentPage + 1)">Next</button>
+    </div>
+  </div>
